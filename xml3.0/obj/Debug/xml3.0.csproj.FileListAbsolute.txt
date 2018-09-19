@@ -5,3 +5,10 @@ C:\Users\ShenBoyi\Desktop\xml3.0\xml3.0\xml3.0\obj\Debug\xml3.0.csprojResolveAss
 C:\Users\ShenBoyi\Desktop\xml3.0\xml3.0\xml3.0\obj\Debug\xml3.0.csproj.CoreCompileInputs.cache
 C:\Users\ShenBoyi\Desktop\xml3.0\xml3.0\xml3.0\obj\Debug\xml3.0.exe
 C:\Users\ShenBoyi\Desktop\xml3.0\xml3.0\xml3.0\obj\Debug\xml3.0.pdb
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\bin\Debug\xml3.0.exe.config
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\bin\Debug\xml3.0.exe
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\bin\Debug\xml3.0.pdb
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\obj\Debug\xml3.0.csprojAssemblyReference.cache
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\obj\Debug\xml3.0.csproj.CoreCompileInputs.cache
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\obj\Debug\xml3.0.exe
+C:\Users\ShenBY\Desktop\XML\xml3.0\xml3.0\obj\Debug\xml3.0.pdb
