@@ -12,7 +12,7 @@ namespace xml3._0
     class DevProps
     {
         //string path = FilePath.filePath+ "\\DevProps.xml";
-        string path = @"C:\Users\ShenBY\Desktop\乌将线CTC\Data-北三台+沙地\北三台\Station_BST\DevProps.xml";
+        string path = @"C:\Users\ShenBY\Desktop\乌将线CTC\Data-土墩子\土墩子\Station_TDZ\DevProps.xml";
         //string path = @"C:\Users\ShenBY\Desktop\乌将线CTC\Data-北三台+沙地\北三台\Station_BST\LayOut反.xml";
         public DevProps()
         {
@@ -145,104 +145,71 @@ namespace xml3._0
             set { isComeBack = value; }
         }
 
-        // public static List<TrainWin> trainWins = new List<TrainWin>();   
+        public static List<TrainWin> trainWins = new List<TrainWin>();
+        public static List<Track> tracks = new List<Track>();
         private IEnumerable<XElement> elementss;
-        public void DevPropsLoad()
+        private List<XElement> elementsss = new List<XElement>();
+        public IEnumerable DevPropsLoad()
         {
-
             XElement xElement = XElement.Load(path);
             elementss = from el in xElement.Elements("Devs")
                         select el;
-            XmlDocument doc = new XmlDocument();
-
-            doc.Load(path);
-            XmlNodeList Activity2Nodes = doc.SelectNodes("DevProps");
-            
-           // XmlNodeList Activity2Nodes = doc.SelectNodes("StationLayout");
-            PrintChildNodes(Activity2Nodes);
+            return elementss;
         }
 
-        
-
-        static void PrintChildNodes(XmlNodeList childnodelist)
+        public IEnumerable<XElement> Load(string devtype)
         {
-            Hashtable hashtable_DevProps = new Hashtable();
-            try
+            DevPropsLoad();
+            IEnumerable<XElement> elements = from el in elementss.Elements(devtype)
+                                             select el;
+            return elements;
+        }
+        public void Load()
+        {
+            TrainWin trainWin = new TrainWin();
+            trainWin.TrainWinLoad();
+            Track track = new Track();
+            track.TrackLoad();
+        }
+    }
+    class TrainWin : DevProps
+    {
+        public void TrainWinLoad()
+        {
+            foreach (var ele in Load("TrainWin"))
             {
-                foreach (XmlNode node in childnodelist)
-                {
-                    //(node.NodeType 是Text时，即是最内层 即innertext值，node.Attributes为null。
-                    int a = node.ChildNodes.Count;
-                    //Console.WriteLine("节点数:" + a);
-                    //Console.WriteLine("node.InnerText:"+node.InnerText);
-                    //if (node.NodeType == XmlNodeType.Text)
-                    //{
-                    //    Console.WriteLine("NodeType:" + node.NodeType + "\t" + node.Name + "\t:" + node.Value);
-                    //    Console.WriteLine("214124214124124124124521641278392104");
-                    //    node.SelectSingleNode("name");
-                    //    //    List<string> Dev = new List<string>();
-                    //    //    Dev.Add(node.Name);
-                    //    //    Dev.Add(node.Value);
-                    //    //if (node.Name=="name")
-                    //    //{
-                    //    //    string name =;
-                    //    //}
-                    //    //hashtable_DevProps.Add(node.Name, node.Value);
-
-
-
-                    //    continue;
-                    //}
-                    Console.WriteLine("==========node.Name:" + node.Name + "===========");
-                    
-                    foreach (XmlAttribute atr in node.Attributes)
-                    {
-                        Console.WriteLine("NodeType:" + atr.NodeType + "\t" + atr.Name + "\t:" + atr.Value);
-                       // Console.WriteLine(atr.InnerText);
-                        //hashtable_DevProps.Add(atr.Name, atr.Value);
-                        List<string> Dev = new List<string>();
-                    }
-
-                    if (node.ChildNodes.Count > 0)
-                    {
-                        PrintChildNodes(node.ChildNodes);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                TrainWin trainwin = new TrainWin();
+                trainwin.id = ele.Attribute("id").Value;
+                trainwin.name = ele.Attribute("name").Value;
+                trainwin.Alias = ele.Attribute("Alias").Value;
+                trainwin.RelatedDev = ele.Attribute("RelatedDev").Value;
+                trainwin.ThroatType = ele.Attribute("ThroatType").Value;
+                trainWins.Add(trainwin);
             }
         }
-        //public IEnumerable<XElement> Load( string devtype)
-        //{
-
-        //    DevPropsLoad(path);
-        //        IEnumerable<XElement> elements = from el in elementss.Elements(devtype)
-        //                                         select el;
-
-
-        //    return elements;
-        //}
     }
-    //class TrainWin: DevProps
-    //{
-    //    public TrainWin()
-    //    {
-    //    }
-    //    public  void  TrainWinLoad()
-    //    {
-    //        foreach (var ele in Load("TrainWin"))
-    //        {
-    //            TrainWin trainwin = new TrainWin();
-    //            trainwin.id = ele.Attribute("id").Value;
-    //            trainwin.name = ele.Attribute("name").Value;
-    //            trainwin.Alias= ele.Attribute("Alias").Value;
-    //            trainwin.RelatedDev= ele.Attribute("RelatedDev").Value;
-    //            trainwin.ThroatType= ele.Attribute("ThroatType").Value;
-    //            trainWins.Add(trainwin);
-    //        }
-    //    }
+    class Track : DevProps
+    {
+        public void TrackLoad()
+        {
+            foreach (var ele in Load("Track"))
+            {
+                Track track = new Track();
+                track.id = ele.Attribute("id").Value;
+                track.name = ele.Attribute("name").Value;
+                track.Alias = ele.Attribute("Alias").Value;
+                track.FieldNo = ele.Attribute("FieldNo").Value;
+                track.TSRLineNo = ele.Attribute("TSRLineNo").Value;
+                track.ThroatType = ele.Attribute("ThroatType").Value;
+                track.Front = ele.Attribute("Front").Value;
+                track.Back  = ele.Attribute("Back").Value;
+                track.LFY  = ele.Attribute("LFY").Value;
+                track.devNoCmdCheck  = ele.Attribute("devNoCmdCheck").Value;
+                track.devNoCmdExe  = ele.Attribute("devNoCmdExe").Value;
+                tracks.Add(track);
+            }
+        }
+    }
 }
 
 
